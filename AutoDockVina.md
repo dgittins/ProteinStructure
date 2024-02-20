@@ -36,7 +36,7 @@ pip install meeko
 ```
 
 1. Prepare the receptor
-2. ```
+```
 prepare_receptor -h
 prepare_receptor -r 1iep_receptorH.pdb -o 1iep_receptor.pdbqt
 ```
@@ -49,8 +49,8 @@ mk_prepare_ligand.py -i 1iep_ligand.sdf -o 1iep_ligand.pdbqt
 
 4. Generate affinity maps for AutoDock FF
 (define the grid space for the docking, typically, a 3D box around a the potential binding site of a receptor) - copy script from GitHub
-emacs prepare_gpf.py
 ```
+emacs prepare_gpf.py
 pythonsh ./prepare_gpf.py -l 1iep_ligand.pdbqt -r 1iep_receptor.pdbqt -y
 less 1iep_receptor.gpf
 ```
