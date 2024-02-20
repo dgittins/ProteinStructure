@@ -10,11 +10,11 @@ cd /home/structure/docking
 Install using Conda
 
 ```
-$ conda create -n autodockvina python=3
-$ conda activate autodockvina
-$ conda config --env --add channels conda-forge
+conda create -n autodockvina python=3
+conda activate autodockvina
+conda config --env --add channels conda-forge
 
-$ conda install -c bioconda vina 
+conda install -c bioconda vina 
 ```
 
 Check install
