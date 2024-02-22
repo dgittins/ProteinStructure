@@ -62,11 +62,18 @@ https://alphafold.ebi.ac.uk/faq - AlphaFold produces a per-residue estimate of i
 color bfactor palette alphafold
 ```
 
-### View the pLDDT plot
+### Evaluate protein-protein binding - view the PAE plot
 
-Useful to assess if complexes are a complex. Copy the corresponding .json file for the structure prediction (created by colabfold) from the server to the local direcory, then:
+Useful to assess if complexes are a complex. Copy the corresponding .json file for the structure prediction (created by Colabfold) from the server to the local direcory, then:
 
 'Tools' > 'Structure Prediction' > 'AlphaFold Error Plot' (select .json file corresponding to the .pdb file)
+
+Select portions of the PAE plot to view the part of the structure it petains to.
+
+View contacts at 8 angstroms (3 angstroms is the default) - blue lines are high confidence, yellow lines low confidence.
+```
+alphafold contacts #2 distance 8
+```
 
 
 ### Color by sequence conservation
@@ -96,3 +103,4 @@ A 2D label to the key:
 ```s
 2dlab text "Conservation (AL2CO entropy measure)"
 ```
+
