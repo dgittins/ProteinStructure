@@ -3,6 +3,7 @@
 Predict the thermal stability of a protein structure
 
 FoldX paper - https://academic.oup.com/bioinformatics/article/35/20/4168/5381539
+
 FoldX manual - https://foldxsuite.crg.eu/documentation#manual
 
 1. Download the latest FoldX software from https://foldxsuite.crg.eu/
