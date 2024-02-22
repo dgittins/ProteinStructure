@@ -22,11 +22,13 @@ cd /Users/dgittins/foldx5MacC11
 
 3. Run a command to calculate the thermal stability of a structure
 
+Stability of object the FoldX ‘Stability’ command calculates the free energy of unfolding (Δ G). This is the difference in free energy between the folded and the unfolded states. All energies resulting from the plugin are expressed in kcal/mol.
+
 ```
 ./foldx_20241231 --command=Stability --pdb=test_relaxed_rank_001_alphafold2_ptm_model_4_seed_000.pdb
 
 for f in *.pdb; do
-  ./foldx_20241231 --command=Stability --pdb=$f
+  ./foldx_20241231 --command=Stability --pdb=$f > $f.foldx.out
 done
 ```
 
@@ -85,4 +87,17 @@ FINISHING STABILITY ANALYSIS OPTION
 Your file run OK
 End time of FoldX: Thu Feb 22 13:52:51 2024
 Total time spend: 0.94 seconds.
+```
+
+4. View the results of multiple runs
+
+Total Energy - This is the predicted overall stability of your protein.
+
+In general, a lower total energy value implies that the protein structure is more stable. Conversely, a higher total energy suggests less stability.
+
+```
+for f in *.pdb.foldx.out; do
+  echo $f
+  grep "Total          =" $f
+done
 ```
