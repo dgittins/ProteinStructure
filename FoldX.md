@@ -12,14 +12,22 @@ Requires registration for an academic license
 
 Copy the downloaded version (foldx5MacC11) to a working directory
 
+```
+cd /Users/dgittins/foldx5MacC11
+
+./foldx_20241231 --help
+```
+
 2. Transfer a .pdb structure to the working directory
 
 3. Run a command to calculate the thermal stability of a structure
 
 ```
-cd /Users/dgittins/foldx5MacC11
-
 ./foldx_20241231 --command=Stability --pdb=test_relaxed_rank_001_alphafold2_ptm_model_4_seed_000.pdb
+
+for f in *.pdb; do
+  ./foldx_20241231 --command=Stability --pdb=$f
+done
 ```
 
 Output:
