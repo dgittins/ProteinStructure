@@ -28,7 +28,8 @@ Stability of object the FoldX ‘Stability’ command calculates the free energy
 ./foldx_20241231 --command=Stability --pdb=test_relaxed_rank_001_alphafold2_ptm_model_4_seed_000.pdb
 
 for f in *.pdb; do
-  ./foldx_20241231 --command=Stability --pdb=$f > $f.foldx.out
+    sample=$(basename $f .pdb)
+    ../foldx_20241231 --command=Stability --pdb=$f > ${sample}.foldx.out
 done
 ```
 
@@ -96,8 +97,27 @@ Total Energy - This is the predicted overall stability of your protein.
 In general, a lower total energy value implies that the protein structure is more stable. Conversely, a higher total energy suggests less stability.
 
 ```
-for f in *.pdb.foldx.out; do
+for f in *.foldx.out; do
   echo $f
   grep "Total          =" $f
 done
 ```
+
+As a table output
+```
+for f in *.foldx.out; do
+  total=$(grep "Total          =" "$f" | awk '{print $3}')
+  echo -e "${f}\t${total}"
+done
+```
+
+5. Interpreting results
+
+```
+FoldX Stability Total: The FoldX stability total is expressed as a ΔG value (in kcal/mol), which represents the free energy change associated with the folding process of the protein or the introduction of mutations. In this context, ΔG is the difference in free energy between the folded (native) state and the unfolded state of the protein.
+
+Interpreting ΔG Values:
+
+Negative ΔG: A negative ΔG value indicates that the folded state is more stable than the unfolded state, suggesting that the protein or mutation is likely to be stable under physiological conditions.
+Positive ΔG: A positive ΔG value suggests that the unfolded state is more stable than the folded state, indicating that the protein or mutation may lead to instability or misfolding.
+Magnitude of ΔG: The magnitude of the ΔG value provides insight into the degree of stability or instability. Larger absolute values (whether positive or negative) signify stronger effects on stability.
