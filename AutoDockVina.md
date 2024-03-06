@@ -41,13 +41,13 @@ prepare_receptor -h
 prepare_receptor -r 1iep_receptorH.pdb -o 1iep_receptor.pdbqt
 ```
 
-3. Prepare the ligand
+2. Prepare the ligand
 ```
 mk_prepare_ligand.py --help
 mk_prepare_ligand.py -i 1iep_ligand.sdf -o 1iep_ligand.pdbqt
 ```
 
-4. Generate affinity maps for AutoDock FF
+3. Generate affinity maps for AutoDock FF
 (define the grid space for the docking, typically, a 3D box around a the potential binding site of a receptor) - copy script from GitHub
 ```
 emacs prepare_gpf.py
