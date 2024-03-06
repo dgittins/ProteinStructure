@@ -19,7 +19,7 @@ conda install -c bioconda vina
 
 Check install
 ```
-$ vina --help
+vina --help
 ```
 
 Install AFDR suite
