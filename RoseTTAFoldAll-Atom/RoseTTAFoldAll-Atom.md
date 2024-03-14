@@ -64,7 +64,7 @@ tar xfz bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz -C ./bfd
 wget https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2021Mar03.tar.gz
 tar xfz pdb100_2021Mar03.tar.gz
 
-# Create links in working directory
+# Create symbolic links to the databases in working directory
 cd ~/bin/RoseTTAFold-All-Atom
 ln -s /shared/db/rosettafold/latest/* .
 ```
