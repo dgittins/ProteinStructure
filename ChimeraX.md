@@ -9,6 +9,11 @@ Useful resources:
 
 ### General commands
 
+Open a model using PDB id
+```
+open <pdb id>
+```
+
 Select model 1 by ID
 ```s
 select #1
