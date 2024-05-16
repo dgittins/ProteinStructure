@@ -76,7 +76,7 @@ a. Create a test fasta file, or use the one in this repository
 - Monomer is hydA.faa, an electron-bifurcating [FeFe] hydrogenase
 
 ```
-https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
 ```
 
 b. Append a chain letter to the protein monomer fasta file (hydA.faa)
@@ -135,17 +135,21 @@ a. Create a test fasta file, or use the one in this repository
 - Polymer is hydA.faa, an electron-bifurcating [FeFe] hydrogenase
 
 ```
-https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydB.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydC.faa
 ```
 
-b. Append a chain letter to the protein monomer fasta file (hydA.faa)
+b. Append a chain letter to the protein monomer fasta file
 ```
-mv hydA.faa hydA_A.faa 
+mv hydA.faa hydA_A.faa
+mv hydB.faa hydB_A.faa
+mv hydC.faa hydC_A.faa
 ```
 
 c. Generate a configuration file for a protein monomer called 'hydA.yaml'
 ```
-emacs hydA.yaml
+emacs hydA_polymer.yaml
 
 
 defaults:
@@ -155,21 +159,24 @@ job_name: "hydA"
 protein_inputs: 
   A:
     fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
-
+  B:
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydB_A.faa
+  C:
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydC_A.faa
 ```
 
 d. Copy configuration file to configuration directory
 ```
-cp hydA.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
+cp hydA_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
 ```
 
-e. Predict the monomer structure
+e. Predict the polymer structure
 ```
-python -m rf2aa.run_inference --config-name hydA.yaml
+python -m rf2aa.run_inference --config-name hydA_polymer.yaml
 ```
 
 ```
-emacs rosetta.bat
+emacs rosetta_polymer.bat
 
 #!/bin/bash
 
@@ -183,7 +190,7 @@ conda activate RFAA
 echo "Starting run at : `date`"
 
 cd ~/bin/RoseTTAFold-All-Atom
-python -m rf2aa.run_inference --config-name hydA.yaml
+python -m rf2aa.run_inference --config-name hydA_polymer.yaml
 
 echo "Job finished with exit code $? at: `date`"
 ```
