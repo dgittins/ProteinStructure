@@ -132,7 +132,7 @@ echo "Job finished with exit code $? at: `date`"
 ### Use RoseTTAFold All-Atom for predicting a protein polymer
 
 a. Create a test fasta file, or use the one in this repository
-- Polymer is hydA.faa, an electron-bifurcating [FeFe] hydrogenase
+- Polymer is hydABC, an electron-bifurcating [FeFe] hydrogenase
 
 ```
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
@@ -143,11 +143,11 @@ wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/h
 b. Append a chain letter to the protein monomer fasta file
 ```
 mv hydA.faa hydA_A.faa
-mv hydB.faa hydB_A.faa
-mv hydC.faa hydC_A.faa
+mv hydB.faa hydB_B.faa
+mv hydC.faa hydC_C.faa
 ```
 
-c. Generate a configuration file for a protein monomer called 'hydA.yaml'
+c. Generate a configuration file for a protein polymer called 'hydA_polymer.yaml'
 ```
 emacs hydA_polymer.yaml
 
@@ -155,19 +155,19 @@ emacs hydA_polymer.yaml
 defaults:
   - base
 
-job_name: "hydA"
+job_name: "hydA_polymer"
 protein_inputs: 
   A:
     fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
   B:
-    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydB_A.faa
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydB_B.faa
   C:
-    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydC_A.faa
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydC_C.faa
 ```
 
-d. Copy configuration file to configuration directory
+d. Move configuration file to configuration directory
 ```
-cp hydA_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
+mv hydA_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
 ```
 
 e. Predict the polymer structure
