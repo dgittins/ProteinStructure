@@ -72,16 +72,22 @@ ln -s /shared/db/rosettafold/latest/* .
 
 ### Use RoseTTAFold All-Atom for predicting a protein monomer
 
+a. Create a test fasta file, or use the one one if the one in this repository
 - Monomer is hydA.faa, an electron-bifurcating [FeFe] hydrogenase
 
-a. Append a chain letter to the protein monomer fasta file (hydA.faa)
+```
+https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
+```
+
+b. Append a chain letter to the protein monomer fasta file (hydA.faa)
 ```
 mv hydA.faa hydA_A.faa 
 ```
 
-b. Generate a configuration file for a protein monomer
+c. Generate a configuration file for a protein monomer called 'hydA.yaml'
 ```
 emacs hydA.yaml
+
 
 defaults:
   - base
@@ -89,15 +95,16 @@ defaults:
 job_name: "hydA"
 protein_inputs: 
   A:
-    fasta_file: /groups/banfield/projects/environmental/borehole/hydrogenase/rosettafold/hydA_A.fasta
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
+
 ```
 
-c. Copy configuration file to configuration directory
+d. Copy configuration file to configuration directory
 ```
 cp hydA.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
 ```
 
-d. Predict the monomer structure
+e. Predict the monomer structure
 ```
 python -m rf2aa.run_inference --config-name hydA.yaml
 ```
