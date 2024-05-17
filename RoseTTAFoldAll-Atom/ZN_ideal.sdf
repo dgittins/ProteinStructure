@@ -1,0 +1,20 @@
+ZN
+  -OEChem-05102419343D
+
+  1  0  0     0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 Zn  0  2  0  0  0  0  0  0  0  0  0  0
+M  CHG  1   1   2
+M  END
+> <OPENEYE_ISO_SMILES>
+[Zn+2]
+
+> <OPENEYE_INCHI>
+InChI=1S/Zn/q+2
+
+> <OPENEYE_INCHIKEY>
+PTFCDOFLOPIGGS-UHFFFAOYSA-N
+
+> <FORMULA>
+Zn+2
+
+$$$$
