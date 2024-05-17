@@ -198,3 +198,70 @@ python -m rf2aa.run_inference --config-name hydA_polymer.yaml
 echo "Job finished with exit code $? at: `date`"
 ```
 
+### Use RoseTTAFold All-Atom for predicting a protein polymer + a small molecule
+
+a. Create a test fasta file, or use the one in this repository
+- Polymer is hydABC, an electron-bifurcating [FeFe] hydrogenase
+
+```
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydB.faa
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydC.faa
+```
+
+b. Append a chain letter to the protein monomer fasta file
+```
+mv hydA.faa hydA_A.faa
+mv hydB.faa hydB_B.faa
+mv hydC.faa hydC_C.faa
+```
+
+c. Generate a configuration file for a protein polymer called 'hydA_polymer.yaml'
+```
+emacs hydA_polymer.yaml
+
+
+defaults:
+  - base
+
+job_name: "hydA_polymer"
+protein_inputs: 
+  A:
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
+  B:
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydB_B.faa
+  C:
+    fasta_file: ~/bin/RoseTTAFold-All-Atom/hydC_C.faa
+```
+
+d. Move configuration file to configuration directory
+```
+mv hydA_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
+```
+
+e. Predict the polymer structure
+```
+python -m rf2aa.run_inference --config-name hydA_polymer.yaml
+```
+
+```
+emacs rosetta_polymer.bat
+
+#!/bin/bash
+
+#SBATCH --mail-user=dgittins@berkeley.edu
+#SBATCH --mail-type=END,FAIL,INVALID_DEPEND,REQUEUE,STAGE_OUT
+#SBATCH --job-name=RFAA
+
+source /shared/software/miniconda3/latest/etc/profile.d/conda.sh
+conda activate RFAA
+
+echo "Starting run at : `date`"
+
+cd ~/bin/RoseTTAFold-All-Atom
+python -m rf2aa.run_inference --config-name hydA_polymer.yaml
+
+echo "Job finished with exit code $? at: `date`"
+```
+
+
