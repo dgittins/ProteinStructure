@@ -242,7 +242,7 @@ protein_inputs:
 
 sm_inputs:
   D:
-    input: ~/bin/RoseTTAFold-All-Atom/FMN_ideal.sdf
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/FMN_ideal.sdf
     input_type: "sdf"
 ```
 
