@@ -129,6 +129,9 @@ python -m rf2aa.run_inference --config-name hydA.yaml
 echo "Job finished with exit code $? at: `date`"
 ```
 
+f. Copy output (hydA.pdb) to local computer and view in chimeraX
+
+
 ### Use RoseTTAFold All-Atom for predicting a protein polymer
 
 a. Create a test fasta file, or use the one in this repository
