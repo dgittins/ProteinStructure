@@ -200,25 +200,23 @@ echo "Job finished with exit code $? at: `date`"
 
 ### Use RoseTTAFold All-Atom for predicting a protein polymer + small molecules
 
-a. Create test fasta files, or use those contained in this repository
-- Polymer is hydABC, an electron-bifurcating [FeFe] hydrogenase
+The aim of this is to used RFAA to reconstuct the heterododecamer hydABC (composed of four HydABC heterotrimers), an electron-bifurcating [FeFe] hydrogenase, using HydABC sequences from my work and small molecules reported by Furlan et al. https://elifesciences.org/articles/79361 (https://www.rcsb.org/structure/7p5h)
 
+a. Download hydABC sequences in this repository
 ```
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydA.faa
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydB.faa
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/hydC.faa
 ```
 
-b. Append a chain letter to the protein monomer fasta file
+b. Append a chain letter to the protein monomer fasta files
 ```
 mv hydA.faa hydA_A.faa
 mv hydB.faa hydB_B.faa
 mv hydC.faa hydC_C.faa
 ```
 
-c. Copy a small molecule of interest to the working directory, or use those contained in this repository
-
-Small molecules are from https://www.rcsb.org/structure/7p5h (and the accompanying manuscript https://elifesciences.org/articles/79361)
+c. Download small molecules in this repository (copied from the PDB - https://www.rcsb.org/structure/7p5h)
 
 FMN_ideal.sdf = flavin mononucleotide\
 ZN_ideal.sdf =  zinc ion, Zn\
@@ -235,12 +233,15 @@ wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/S
 **Important Note** - RosettaFold All Atom will fail on inorganic ligands (e.g. iron/sulfur clusters). Solution is to change "mmff94" forcefield to "uff" in rf2aa/data/parsers.py (GitHub issue for more information: https://github.com/baker-laboratory/RoseTTAFold-All-Atom/issues/86)
 
 ```
-# Make a copy of the original code and then replcae 'mmff94' with 'uff'
+# make a copy of the original code and then replace 'mmff94' with 'uff'
 cp ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers.py ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers_original.py
 sed -i 's/mmff94/uff/g' ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers.py 
 ```
 
 d. Generate a configuration file for a protein polymer + small molecules called 'hydABC_polymer_molecule.yaml'
+
+Each heterotrimer of the [FeFe] enzyme has a total of seven [4Fe–4S] clusters (including the subcluster of the H-cluster) and four [2Fe–2S] clusters, plus a flavin mononucleotide and a zinc ion. 
+
 ```
 emacs hydABC_polymer_molecule.yaml
 
@@ -248,7 +249,7 @@ emacs hydABC_polymer_molecule.yaml
 defaults:
   - base
 
-job_name: "hydA_polymer_molecule"
+job_name: "hydABC_polymer_molecule"
 protein_inputs: 
   A:
     fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
@@ -259,7 +260,43 @@ protein_inputs:
 
 sm_inputs:
   D:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  E:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  F:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  G:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  H:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  I:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  J:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
+    input_type: "sdf"
+  K:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/FES_ideal.sdf
+    input_type: "sdf"
+  L:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/FES_ideal.sdf
+    input_type: "sdf"
+  M:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/FES_ideal.sdf
+    input_type: "sdf"
+  N:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/FES_ideal.sdf
+    input_type: "sdf"
+  O:
     input: /home/dgittins/bin/RoseTTAFold-All-Atom/FMN_ideal.sdf
+    input_type: "sdf"
+  P:
+    input: /home/dgittins/bin/RoseTTAFold-All-Atom/SF4_ideal.sdf
     input_type: "sdf"
 ```
 
@@ -288,7 +325,7 @@ conda activate RFAA
 echo "Starting run at : `date`"
 
 cd ~/bin/RoseTTAFold-All-Atom
-python -m rf2aa.run_inference --config-name hydA_polymer_molecule.yaml
+python -m rf2aa.run_inference --config-name hydABC_polymer_molecule.yaml
 
 echo "Job finished with exit code $? at: `date`"
 ```
