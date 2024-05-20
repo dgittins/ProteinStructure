@@ -198,9 +198,9 @@ python -m rf2aa.run_inference --config-name hydA_polymer.yaml
 echo "Job finished with exit code $? at: `date`"
 ```
 
-### Use RoseTTAFold All-Atom for predicting a protein polymer + a small molecule
+### Use RoseTTAFold All-Atom for predicting a protein polymer + small molecules
 
-a. Create test fasta files, or use the ones in this repository
+a. Create test fasta files, or use those contained in this repository
 - Polymer is hydABC, an electron-bifurcating [FeFe] hydrogenase
 
 ```
@@ -216,14 +216,23 @@ mv hydB.faa hydB_B.faa
 mv hydC.faa hydC_C.faa
 ```
 
-c. Copy a small molecule of interest to the working directory, or use one of the ones in this repository
-- Molecule is a flavin mononucleotide from https://www.rcsb.org/structure/7p5h (and the accompanying manuscript https://elifesciences.org/articles/79361)
+c. Copy a small molecule of interest to the working directory, or use those contained in this repository
+
+Small molecules are from https://www.rcsb.org/structure/7p5h (and the accompanying manuscript https://elifesciences.org/articles/79361)
+
+FMN_ideal.sdf = flavin mononucleotide
+ZN_ideal.sdf =  zinc ion, Zn
+FES_ideal.sdf = iron/sulfur cluster, Fe2 S2
+SF4_ideal.sdf = iron/sulfur cluster, Fe4 S4
 
 ```
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/FMN_ideal.sdf
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/ZN_ideal.sdf
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/FES_ideal.sdf
+wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/SF4_ideal.sdf
 ```
 
-d. Generate a configuration file for a protein polymer + small molecule called 'hydA_polymer_molecule.yaml'
+d. Generate a configuration file for a protein polymer + small molecule called 'hydABC_polymer_molecule.yaml'
 ```
 emacs hydA_polymer_molecule.yaml
 
