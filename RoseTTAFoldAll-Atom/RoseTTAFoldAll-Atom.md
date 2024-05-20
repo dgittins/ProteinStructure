@@ -150,15 +150,15 @@ mv hydB.faa hydB_B.faa
 mv hydC.faa hydC_C.faa
 ```
 
-c. Generate a configuration file for a protein polymer called 'hydA_polymer.yaml'
+c. Generate a configuration file for a protein polymer called 'hydABC_polymer.yaml'
 ```
-emacs hydA_polymer.yaml
+emacs hydABC_polymer.yaml
 
 
 defaults:
   - base
 
-job_name: "hydA_polymer"
+job_name: "hydABC_polymer"
 protein_inputs: 
   A:
     fasta_file: ~/bin/RoseTTAFold-All-Atom/hydA_A.faa
@@ -170,12 +170,12 @@ protein_inputs:
 
 d. Move configuration file to configuration directory
 ```
-mv hydA_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
+mv hydABC_polymer.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
 ```
 
 e. Predict the polymer structure
 ```
-python -m rf2aa.run_inference --config-name hydA_polymer.yaml
+python -m rf2aa.run_inference --config-name hydABC_polymer.yaml
 ```
 
 ```
@@ -193,7 +193,7 @@ conda activate RFAA
 echo "Starting run at : `date`"
 
 cd ~/bin/RoseTTAFold-All-Atom
-python -m rf2aa.run_inference --config-name hydA_polymer.yaml
+python -m rf2aa.run_inference --config-name hydABC_polymer.yaml
 
 echo "Job finished with exit code $? at: `date`"
 ```
@@ -220,9 +220,9 @@ c. Copy a small molecule of interest to the working directory, or use those cont
 
 Small molecules are from https://www.rcsb.org/structure/7p5h (and the accompanying manuscript https://elifesciences.org/articles/79361)
 
-FMN_ideal.sdf = flavin mononucleotide
-ZN_ideal.sdf =  zinc ion, Zn
-FES_ideal.sdf = iron/sulfur cluster, Fe2 S2
+FMN_ideal.sdf = flavin mononucleotide\
+ZN_ideal.sdf =  zinc ion, Zn\
+FES_ideal.sdf = iron/sulfur cluster, Fe2 S2\
 SF4_ideal.sdf = iron/sulfur cluster, Fe4 S4
 
 ```
@@ -232,9 +232,17 @@ wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/F
 wget https://github.com/dgittins/ProteinStructure/raw/main/RoseTTAFoldAll-Atom/SF4_ideal.sdf
 ```
 
-d. Generate a configuration file for a protein polymer + small molecule called 'hydABC_polymer_molecule.yaml'
+**Important Note** - RosettaFold All Atom will fail on inorganic ligands (e.g. iron/sulfur clusters). Solution is to change "mmff94" forcefield to "uff" in rf2aa/data/parsers.py (GitHub issue for more information: https://github.com/baker-laboratory/RoseTTAFold-All-Atom/issues/86)
+
 ```
-emacs hydA_polymer_molecule.yaml
+# Make a copy of the original code and then replcae 'mmff94' with 'uff'
+cp ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers.py ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers_original.py
+sed -i 's/mmff94/uff/g' ~/bin/RoseTTAFold-All-Atom/rf2aa/data/parsers.py 
+```
+
+d. Generate a configuration file for a protein polymer + small molecules called 'hydABC_polymer_molecule.yaml'
+```
+emacs hydABC_polymer_molecule.yaml
 
 
 defaults:
@@ -257,12 +265,12 @@ sm_inputs:
 
 e. Move configuration file to configuration directory
 ```
-mv hydA_polymer_molecule.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
+mv hydABC_polymer_molecule.yaml ~/bin/RoseTTAFold-All-Atom/rf2aa/config/inference/
 ```
 
 f. Predict the polymer structure
 ```
-python -m rf2aa.run_inference --config-name hydA_polymer_molecule.yaml
+python -m rf2aa.run_inference --config-name hydABC_polymer_molecule.yaml
 ```
 
 ```
