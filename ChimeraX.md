@@ -49,7 +49,7 @@ Color structure using hexcode (color <structure ID> <hexcode>)
 color #1 #2d5280ff
 ```
 
-Superimpose (align) two sturctures:
+Superimpose (align) two sturctures
 
 'Tools' > 'Structure Analysis' > ' Matchmaker'
 ```
@@ -60,10 +60,11 @@ mm #2 to #1
 mm #2 to #1/a,b,c
 ```
 
-Combine multiple models into a single model:
+Combine multiple models into a single model and rename the ouput
 ```
 combine #19,20,21,22 modelId #23
 ```
+
 Save image:
 
 'File' > 'Save...' > 'Files of type: PNG image (*.png)' > "structure.png"
