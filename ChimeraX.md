@@ -53,9 +53,17 @@ Superimpose (align) two sturctures:
 
 'Tools' > 'Structure Analysis' > ' Matchmaker'
 ```
+# match maker structure 2 to structure 1
 mm #2 to #1
+
+# match maker structure 2 to structure 1 chain a, b, c
+mm #2 to #1/a,b,c
 ```
 
+Combine multiple models into a single model:
+```
+combine #19,20,21,22 modelId #23
+```
 Save image:
 
 'File' > 'Save...' > 'Files of type: PNG image (*.png)' > "structure.png"
