@@ -52,6 +52,9 @@ color #1 #2d5280ff
 Superimpose (align) two sturctures:
 
 'Tools' > 'Structure Analysis' > ' Matchmaker'
+```
+mm #2 to #1
+```
 
 Save image:
 
