@@ -69,6 +69,10 @@ Save image:
 
 'File' > 'Save...' > 'Files of type: PNG image (*.png)' > "structure.png"
 
+```
+save ~/model1.pdb models #1
+```
+
 ### Color by pLDDT 
 
 Color structures by AlphaFold2’s pLDDT (predicted local distance difference test). Note: the pLDDT values are the b-factor column in PDB.
