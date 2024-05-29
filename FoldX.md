@@ -10,15 +10,16 @@ FoldX manual - https://foldxsuite.crg.eu/documentation#manual
 
 Requires registration for an academic license
 
-Copy the downloaded version (foldx5MacC11) to a working directory
+Move the downloaded version (e.g. foldx5MacC11) to a working directory
 
 ```
-cd /Users/dgittins/foldx5MacC11
+mv /Users/dgittins/Downloads/foldxMacC11_0 /Users/dgittins/Software/foldxMacC11_0 
 
-./foldx_20241231 --help
+# confirm installation
+/Users/dgittins/Software/foldxMacC11_0/foldx_20241231 --help
 ```
 
-2. Transfer a .pdb structure to the working directory
+2. Transfer a .pdb structure to the foldx directory
 
 3. Run a command to calculate the thermal stability of a structure
 
@@ -29,7 +30,7 @@ Stability of object the FoldX ‘Stability’ command calculates the free energy
 
 for f in *.pdb; do
     sample=$(basename $f .pdb)
-    ../foldx_20241231 --command=Stability --pdb=$f > ${sample}.foldx.out
+    /Users/dgittins/Software/foldxMacC11_0/foldx_20241231 --command=Stability --pdb=$f > ${sample}.foldx.out
 done
 ```
 
