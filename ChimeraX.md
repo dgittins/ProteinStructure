@@ -72,6 +72,9 @@ Save image:
 ```
 cd ...
 save ~/model1.pdb models #1
+
+# High resolution
+save model1.png format png width 10000
 ```
 
 ### Color by pLDDT 
