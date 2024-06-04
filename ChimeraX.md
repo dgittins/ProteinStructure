@@ -70,6 +70,7 @@ Save image:
 'File' > 'Save...' > 'Files of type: PNG image (*.png)' > "structure.png"
 
 ```
+cd ...
 save ~/model1.pdb models #1
 ```
 
