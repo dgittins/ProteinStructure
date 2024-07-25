@@ -60,6 +60,12 @@ mm #2 to #1
 mm #2 to #1/a,b,c
 ```
 
+Label selected residues
+```
+# select the residues in a msa
+label @@display
+```
+
 Combine multiple models into a single model and rename the ouput
 ```
 combine #19,20,21,22 modelId #23
@@ -128,4 +134,3 @@ A 2D label to the key:
 ```s
 2dlab text "Conservation (AL2CO entropy measure)"
 ```
-
